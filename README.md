@@ -1,5 +1,5 @@
 # scan_net
-Python 3.7+ Script with Fing which scan local network at regular interval, and notify by Telegram
+Python 3.7+ Script with Fing which scan local network at regular interval, and notify by Telegram if a new device is discovered
 
 Pre requisites :
 `pip install pandas colorlog`
