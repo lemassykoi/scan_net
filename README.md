@@ -12,4 +12,5 @@ You need to add this line at the end of sudoers file, to be able to run `sudo fi
 ```myusername ALL = (root) NOPASSWD: /bin/fing```
 
 You have to replace `myusername` with your username
+
 Adjust variables at the beginning of the script
