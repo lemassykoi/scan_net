@@ -7,7 +7,7 @@ Pre requisites :
 
 Fing CLI : https://www.fing.com/images/uploads/general/CLI_Linux_Debian_5.5.2.zip  (Debian .deb file)
 
-You need to add this line at the end of sudoers file, to be able to run `sudo fing` without password asking :
+You need to add this line at the end of sudoers file ( run `visudo` ) to be able to run `sudo fing` without password asking :
 
 ```myusername ALL = (root) NOPASSWD: /bin/fing```
 
