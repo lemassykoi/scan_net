@@ -11,7 +11,7 @@ irrelevant  = ['192.168.0.2',   # Dashcam
                '192.168.0.254']
 file1       = 'devices_list_1.csv'
 file2       = 'devices_list_2.csv'
-my_log_file = 'scan_net.log'
+my_log_file = os.path.basename(__file__) + '.log'
 method1     = 'log,csv,' + file1
 method2     = 'log,csv,' + file2
 
