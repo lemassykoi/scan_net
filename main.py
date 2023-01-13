@@ -11,14 +11,16 @@ irrelevant  = ['192.168.0.2',   # Dashcam
                '192.168.0.254']
 file1       = 'devices_list_1.csv'
 file2       = 'devices_list_2.csv'
+file3       = 'details.csv'
 my_log_file = os.path.basename(__file__) + '.log'
 method1     = 'log,csv,' + file1
 method2     = 'log,csv,' + file2
+method_ext  = 'csv,' + file3
 
 def Notify(Message):
     logger = logging.getLogger()
     logger.info(Message)
-    requests.get('https://api.telegram.org/bot' + TG_token + '/sendMessage?chat_id=' + TG_chat_id + '&text=' + Message)
+    requests.get('https://api.telegram.org/bot' + TG_token + '/sendMessage?chat_id=' + TG_chat_id + '&parse_mode=HTML&text=<code>' + Message + '</code>')
 
 def setup_logging(log_file):
   # Création de l'objet logger
@@ -87,7 +89,6 @@ def show_diff():
     for new_ip in new_ips:
       if new_ip not in irrelevant:
         print(f"New IP : {new_ip}")
-        extended_scan(new_ip)
       else:
         print(f"Irrelevant IP : {new_ip}")
   else:
@@ -95,7 +96,7 @@ def show_diff():
   return new_ips
 
 def extended_scan(host):
-  ext_scan_result = subprocess.run(['sudo', 'fing', '-s', host], capture_output=True, text=True)
+  ext_scan_result = subprocess.run(['sudo', 'fing', '-s', host, '-o', method_ext], capture_output=True, text=True)
   Notify(ext_scan_result.stdout)
   return
 
@@ -117,6 +118,7 @@ def main():
     for ip_add in new_ips:
       if ip_add not in irrelevant:
         Notify('New IP : ' + str(ip_add))
+        extended_scan(new_ip)
     logger.info('Sleep...')
     time.sleep(sleep_time)
 
