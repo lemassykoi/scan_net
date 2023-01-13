@@ -97,6 +97,7 @@ def show_diff():
 
 def extended_scan(host):
   ext_scan_result = subprocess.run(['sudo', 'fing', '-s', host, '-o', method_ext], capture_output=True, text=True)
+  os.remove(file3)
   Notify(ext_scan_result.stdout)
   return
 
