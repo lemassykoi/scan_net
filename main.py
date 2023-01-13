@@ -87,12 +87,17 @@ def show_diff():
     for new_ip in new_ips:
       if new_ip not in irrelevant:
         print(f"New IP : {new_ip}")
-        ## nmap new_ip
+        extended_scan(new_ip)
       else:
         print(f"Irrelevant IP : {new_ip}")
   else:
     logger.info('No new host. Cool.')
   return new_ips
+
+def extended_scan(host):
+  ext_scan_result = subprocess.run(['sudo', 'fing', '-s', host], capture_output=True, text=True)
+  Notify(ext_scan_result.stdout)
+  return
 
 def main():
   signal.signal(signal.SIGINT, signal_handler)
